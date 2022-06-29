@@ -19,9 +19,17 @@ public class User implements Serializable {
 
     @Column(name = "USERNAME", nullable = false, unique = true)
     @JsonView(Views.UI.class)
-    public String username;
+    private String username;
 
     @Column(name = "PASSWORD", nullable = false)
     @JsonView(Views.UI.class)
-    public String password;
+    private String password;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(name = "USER_DETAILS",
+            joinColumns =
+                    {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
+            inverseJoinColumns =
+                    {@JoinColumn(name = "DETAILS_ID", referencedColumnName = "ID")})
+    private Details details;
 }
