@@ -31,5 +31,6 @@ public class User implements Serializable {
                     {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
             inverseJoinColumns =
                     {@JoinColumn(name = "DETAILS_ID", referencedColumnName = "ID")})
+    @JsonView(Views.Disabled.class)
     private Details details;
 }

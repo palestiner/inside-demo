@@ -5,3 +5,4 @@ create table user_details (details_id int8, user_id int8 not null, primary key (
 alter table if exists app_user add constraint UK_3k4cplvh82srueuttfkwnylq0 unique (username);
 alter table if exists user_details add constraint FKb2ykdv13ox3dpj2mvl7b3l8pb foreign key (details_id) references details;
 alter table if exists user_details add constraint FK9gi3puv1xjf9opa5eff9ojpo0 foreign key (user_id) references app_user;
+insert into app_user (id, password, username)values (1, '$2a$10$slYQmyNdGzTn7ZLBXBChFOC9f6kFjAqPhccnP6DxlWXx2lPk1C3G6', 'user');
