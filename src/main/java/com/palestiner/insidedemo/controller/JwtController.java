@@ -1,4 +1,4 @@
-package com.palestiner.insidedemo.model.controller;
+package com.palestiner.insidedemo.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.palestiner.insidedemo.config.jwt.JwtResponseModel;
