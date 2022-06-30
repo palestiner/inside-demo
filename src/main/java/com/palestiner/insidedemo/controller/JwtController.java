@@ -26,19 +26,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @CrossOrigin
 public class JwtController {
-    @Autowired
-    private JwtUserDetailsService userDetailsService;
-    @Autowired
-    private AuthenticationManager authenticationManager;
-    @Autowired
-    private TokenManager tokenManager;
+
+    private final JwtUserDetailsService userDetailsService;
+    private final AuthenticationManager authenticationManager;
+    private final TokenManager tokenManager;
+
     @PostMapping("/login")
+    @JsonView(Views.UI.class)
     public ResponseEntity<? extends JwtResponseModel> createToken(@RequestBody User request) throws Exception {
         try {
             authenticationManager.authenticate(
-                    new
-                            UsernamePasswordAuthenticationToken(request.getUsername(),
-                            request.getPassword())
+                    new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
             );
         } catch (DisabledException e) {
             throw new Exception("USER_DISABLED", e);
