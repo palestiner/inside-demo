@@ -2,7 +2,6 @@ version: "3.3"
 services:
   app:
     container_name: inside-demo
-    image: springboot-postgresql
     build: ../../../
     ports:
       - "8081:8081"
