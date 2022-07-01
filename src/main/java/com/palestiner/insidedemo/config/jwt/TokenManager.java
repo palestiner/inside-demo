@@ -14,9 +14,6 @@ import java.util.Map;
 
 @Component
 public class TokenManager implements Serializable {
-    /**
-     *
-     */
     private static final long serialVersionUID = 7008375124389347049L;
     public static final long TOKEN_VALIDITY = 10 * 60 * 60;
     @Value("${secret}")

@@ -1,0 +1,21 @@
+version: "3.3"
+services:
+  app:
+    container_name: inside-demo
+    image: springboot-postgresql
+    build: ../../../
+    ports:
+      - "8081:8081"
+    depends_on:
+      - inside-db
+  inside-db:
+    container_name: inside-db
+    image: postgres:14.1
+    environment:
+      - POSTGRES_USER=demo
+      - POSTGRES_PASSWORD=demo
+      - POSTGRES_DB=demo
+    volumes:
+      - ./create.sql:/docker-entrypoint-initdb.d/1-init.sql
+    ports:
+      - "127.0.0.1:5432:5432"
