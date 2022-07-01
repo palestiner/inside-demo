@@ -1,11 +1,14 @@
 package com.palestiner.insidedemo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.palestiner.insidedemo.model.view.Views;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @Entity
@@ -14,23 +17,24 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID", nullable = false)
-    @JsonView({Views.Disabled.class})
+    @JsonIgnore
     private Long id;
 
     @Column(name = "USERNAME", nullable = false, unique = true)
-    @JsonView(Views.UI.class)
+    @JsonView(Views.OnlyUsername.class)
     private String username;
 
     @Column(name = "PASSWORD", nullable = false)
-    @JsonView(Views.UI.class)
+    @JsonView(Views.Password.class)
     private String password;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinTable(name = "USER_DETAILS",
-            joinColumns =
-                    {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
-            inverseJoinColumns =
-                    {@JoinColumn(name = "DETAILS_ID", referencedColumnName = "ID")})
-    @JsonView(Views.Disabled.class)
-    private Details details;
+    @OneToMany(mappedBy = "user")
+    @JsonManagedReference
+    private List<Message> messages;
+
+    public User(String username) {
+        this.username = username;
+    }
+
+    public User() {}
 }

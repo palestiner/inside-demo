@@ -1,22 +1,16 @@
 package com.palestiner.insidedemo.controller;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import com.palestiner.insidedemo.config.jwt.JwtResponseModel;
 import com.palestiner.insidedemo.config.jwt.JwtUserDetailsService;
 import com.palestiner.insidedemo.config.jwt.TokenManager;
 import com.palestiner.insidedemo.model.User;
-import com.palestiner.insidedemo.model.view.Views;
-import com.palestiner.insidedemo.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,7 +26,6 @@ public class JwtController {
     private final TokenManager tokenManager;
 
     @PostMapping("/login")
-    @JsonView(Views.UI.class)
     public ResponseEntity<? extends JwtResponseModel> createToken(@RequestBody User request) throws Exception {
         try {
             authenticationManager.authenticate(
