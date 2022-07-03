@@ -34,4 +34,5 @@ docker-compose -f .\src\main\docker\docker-compose.yml up -d
 
 For more information refer to [Using Docker and Docker-Compose](https://docs.docker.com/compose/gettingstarted/).
 
-
+## Docker image
+https://hub.docker.com/r/palestiner/inside-demo
