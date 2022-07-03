@@ -35,4 +35,42 @@ docker-compose -f .\src\main\docker\docker-compose.yml up -d
 For more information refer to [Using Docker and Docker-Compose](https://docs.docker.com/compose/gettingstarted/).
 
 ## Docker image
+
 https://hub.docker.com/r/palestiner/inside-demo
+
+## Curl commands
+
+- login
+
+```
+curl --location --request POST 'http://localhost:8081/login' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "username": "user",
+    "password": "password"
+}'
+```
+
+- create message
+
+```
+curl --location --request POST 'http://localhost:8081/messages' \
+--header 'Authorization: Bearer_{token_from_login}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "username": "user",
+    "message": "сообщение10"
+}'
+```
+
+- get last n messages
+
+```
+curl --location --request GET 'http://localhost:8081/messages' \
+--header 'Authorization: Bearer_{token_from_login}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "username": "user",
+    "message": "history 10"
+}'
+```
