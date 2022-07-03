@@ -3,7 +3,6 @@ package com.palestiner.insidedemo.config;
 import com.palestiner.insidedemo.config.jwt.JwtAuthenticationEntryPoint;
 import com.palestiner.insidedemo.config.jwt.JwtFilter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
