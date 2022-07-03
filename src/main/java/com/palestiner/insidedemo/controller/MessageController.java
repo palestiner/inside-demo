@@ -7,6 +7,7 @@ import com.palestiner.insidedemo.model.view.Views;
 import com.palestiner.insidedemo.service.MessageService;
 import com.palestiner.insidedemo.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,11 +24,11 @@ public class MessageController {
 
     @PostMapping("/messages")
     @JsonView(Views.Message.class)
-    public ResponseEntity<?> createMessage(@RequestBody Message message) {
+    public ResponseEntity<String> createMessage(@RequestBody Message message) {
         User userDb = userService.findUserByUsername(message.getUser().getUsername());
         message.setUser(userDb);
         messageService.saveMessage(message);
-        return ResponseEntity.ok("Message was created");
+        return new ResponseEntity<>("Message was created", HttpStatus.CREATED);
     }
 
     @GetMapping("/messages")

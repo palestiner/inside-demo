@@ -21,7 +21,7 @@ public class JwtUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         return Optional
-                .of(user)
+                .ofNullable(user)
                 .map(u -> new org.springframework.security.core.userdetails.User(
                         user.getUsername(),
                         user.getPassword(),

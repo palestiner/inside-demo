@@ -5,6 +5,7 @@ import com.palestiner.insidedemo.config.jwt.JwtUserDetailsService;
 import com.palestiner.insidedemo.config.jwt.TokenManager;
 import com.palestiner.insidedemo.model.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -38,6 +39,6 @@ public class JwtController {
         }
         final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
         final String jwtToken = tokenManager.generateJwtToken(userDetails);
-        return ResponseEntity.ok(new JwtResponseModel(jwtToken));
+        return new ResponseEntity<>(new JwtResponseModel(jwtToken), HttpStatus.CREATED);
     }
 }
